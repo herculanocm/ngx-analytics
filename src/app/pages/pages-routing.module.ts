@@ -5,12 +5,16 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
-import { MsalGuard } from '@azure/msal-angular';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
+    {
+      path: 'home',
+      component: HomeComponent,
+    },
     {
       path: 'dashboard',
       component: ECommerceComponent,
@@ -18,14 +22,16 @@ const routes: Routes = [{
     {
       path: 'iot-dashboard',
       component: DashboardComponent,
-      canActivate: [
-        MsalGuard
-      ]
     },
     {
       path: 'layout',
       loadChildren: () => import('./layout/layout.module')
         .then(m => m.LayoutModule),
+    },
+    {
+      path: 'dados-publicos',
+      loadChildren: () => import('./dados-publicos/dpublicos.module')
+        .then(d => d.DadosPublicosModule),
     },
     {
       path: 'forms',
@@ -74,7 +80,7 @@ const routes: Routes = [{
     },
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'home',
       pathMatch: 'full',
     },
     {
