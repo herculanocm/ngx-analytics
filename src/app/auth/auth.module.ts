@@ -5,6 +5,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import { ThemeModule } from '../@theme/theme.module';
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 
 const IMPORTS = [
     CommonModule,
@@ -15,6 +16,7 @@ const IMPORTS = [
 const DECLARATIONS = [
     AuthComponent,
     LoginComponent,
+    LogoutComponent,
 ];
 const PROVIDERS = [];
 

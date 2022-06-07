@@ -19,15 +19,36 @@ export class LoginComponent implements OnInit {
         private msalBroadcastService: MsalBroadcastService
     ) { }
     ngOnInit() {
-        this.logout();
+        if (this.isLogged()) {
+            this._router.navigate(['pages', 'home']);
+        }
     }
     logout() {
-        this.authService.logout();
+        if (this.authService.instance.getActiveAccount() != null || this.authService.instance.getAllAccounts().length >= 1) {
+            this.authService.logout();
+        }
+    }
+    account(): void {
+        console.log(this.authService.instance.getAllAccounts());
+    }
+    isLogged(): boolean {
+        // console.log('aqui');
+        // console.log(this.authService.instance.getActiveAccount());
+        // console.log(this.authService.instance.getAllAccounts());
+        // let activeAccount = this.authService.instance.getActiveAccount();
+        if (this.authService.instance.getAllAccounts().length > 0) {
+            let accounts = this.authService.instance.getAllAccounts();
+             this.authService.instance.setActiveAccount(accounts[0]);
+             return true;
+        } else {
+            return false;
+        }
     }
     login() {
         this._router.navigate(['pages', 'home']);
         /*
         if (this.msalGuardConfig.interactionType === InteractionType.Popup) {
+            console.log('if');
             if (this.msalGuardConfig.authRequest) {
                 this.authService.loginPopup({ ...this.msalGuardConfig.authRequest } as PopupRequest)
                     .subscribe((response: AuthenticationResult) => {
@@ -40,12 +61,25 @@ export class LoginComponent implements OnInit {
                     });
             }
         } else {
+            console.log('else');
             if (this.msalGuardConfig.authRequest) {
-                this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest } as RedirectRequest);
+               
+                
+
+                
+                this.authService.instance.handleRedirectPromise().then(authResult => {
+                    this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest } as RedirectRequest);
+                }).catch(err => {
+                    console.log(err);
+                });
+                
+
+                // this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest } as RedirectRequest);
             } else {
                 this.authService.loginRedirect();
             }
         }
         */
+
     }
 }

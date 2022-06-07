@@ -9,6 +9,7 @@ import {
   NbResetPasswordComponent,
 } from '@nebular/auth';
 import { MsalGuard } from '@azure/msal-angular';
+import { AppGuard } from './app.guard';
 
 export const routes: Routes = [
   {
@@ -16,8 +17,8 @@ export const routes: Routes = [
     loadChildren: () => import('./pages/pages.module')
       .then(m => m.PagesModule),
       canActivate: [
-        MsalGuard
-      ]
+        MsalGuard,
+      ],
   },
   {
     path: 'auth',
@@ -35,6 +36,7 @@ const config: ExtraOptions = {
 @NgModule({
   imports: [RouterModule.forRoot(routes, config)],
   exports: [RouterModule],
+  providers: [ AppGuard ],
 })
 export class AppRoutingModule {
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MENU_ITEMS } from './pages-menu';
+import { MENU_ITEMS, NbMenuItemAux } from './pages-menu';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
@@ -21,9 +21,10 @@ export class PagesComponent implements OnInit {
   private readonly _destroying$ = new Subject<void>();
 
   constructor(private authService: MsalService, private msalBroadcastService: MsalBroadcastService) { }
-  menu = MENU_ITEMS;
+  menu: NbMenuItemAux[];
 
   ngOnInit(): void {
+
     this.msalBroadcastService.msalSubject$
       .pipe(
         filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
@@ -42,7 +43,24 @@ export class PagesComponent implements OnInit {
         this.checkAndSetActiveAccount();
       });
 
+      const roles = this.authService.instance.getActiveAccount().idTokenClaims.roles;
+      this.menu = this.verificaAcessos(MENU_ITEMS, roles);
   }
+
+  verificaAcessos(menus: NbMenuItemAux[], roles: string[]): NbMenuItemAux[] {
+    return menus.filter(menu => {
+      return (
+        menu.roles.filter(role => {
+          return role === 'ROLE_ANY' || (
+            roles.filter(roleUser => {
+              return roleUser === role;
+            })
+          ).length > 0;
+        })
+      ).length > 0;
+    });
+  }
+
 
   checkAndSetActiveAccount() {
     /**

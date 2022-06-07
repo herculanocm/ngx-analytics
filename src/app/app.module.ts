@@ -26,6 +26,7 @@ import { MsalGuard, MsalInterceptor, MsalBroadcastService, MsalInterceptorConfig
 
 import { msalConfig, loginRequest, protectedResources } from './auth-config';
 
+
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication(msalConfig);
 }
