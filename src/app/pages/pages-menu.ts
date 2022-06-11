@@ -2,12 +2,14 @@ import { NbMenuItem } from '@nebular/theme';
 export class NbMenuItemAux extends NbMenuItem {
   roles?: String[];
   children?: NbMenuItemAux[];
+  show?: boolean;
 }
 export const MENU_ITEMS: NbMenuItemAux[] = [
   {
     title: 'Home',
     icon: 'home-outline',
     link: '/pages/home',
+    show: true,
     home: true,
     roles: [
       'ROLE_ADMIN',
@@ -26,11 +28,14 @@ export const MENU_ITEMS: NbMenuItemAux[] = [
   {
     title: 'FEATURES',
     group: true,
+    show: true,
     roles: ['ROLE_ANY'],
   },
   {
     title: 'Dados Públicos',
     icon: 'file-text-outline',
+    link: '/pages/dados-publicos',
+    show: true,
     roles: [
       'ROLE_ADMIN',
       'ROLE_DADOS_PUBLICOS',
@@ -39,6 +44,7 @@ export const MENU_ITEMS: NbMenuItemAux[] = [
       {
         title: 'Upload',
         link: '/pages/dados-publicos/upload',
+        show: true,
         roles: [
           'ROLE_ADMIN',
           'ROLE_DADOS_PUBLICOS',
@@ -110,12 +116,13 @@ export const MENU_ITEMS: NbMenuItemAux[] = [
     title: 'UI Features',
     icon: 'keypad-outline',
     link: '/pages/ui-features',
-    roles: [],
+    show: true,
+    roles: ['ROLE_ANY',],
     children: [
       {
         title: 'Grid',
         link: '/pages/ui-features/grid',
-        roles: [],
+        roles: ['ROLE_ANY',],
       },
       {
         title: 'Icons',
@@ -289,6 +296,7 @@ export const MENU_ITEMS: NbMenuItemAux[] = [
   {
     title: 'Miscellaneous',
     icon: 'shuffle-2-outline',
+    show: false,
     roles: ['ROLE_ANY'],
     children: [
       {

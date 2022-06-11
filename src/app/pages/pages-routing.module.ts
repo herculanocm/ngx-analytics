@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
+import { PagesGuard } from './pages.guard';
 
 const routes: Routes = [{
   path: '',
@@ -32,6 +33,9 @@ const routes: Routes = [{
       path: 'dados-publicos',
       loadChildren: () => import('./dados-publicos/dpublicos.module')
         .then(d => d.DadosPublicosModule),
+        canActivate: [
+          PagesGuard,
+        ],
     },
     {
       path: 'forms',
@@ -93,6 +97,7 @@ const routes: Routes = [{
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  providers: [PagesGuard],
 })
 export class PagesRoutingModule {
 }

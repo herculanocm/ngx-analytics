@@ -50,7 +50,7 @@ export class PagesComponent implements OnInit {
   verificaAcessos(menus: NbMenuItemAux[], roles: string[]): NbMenuItemAux[] {
     return menus.filter(menu => {
       return (
-        menu.roles.filter(role => {
+        menu.show != null && menu.show == true && menu.roles.filter(role => {
           return role === 'ROLE_ANY' || (
             roles.filter(roleUser => {
               return roleUser === role;

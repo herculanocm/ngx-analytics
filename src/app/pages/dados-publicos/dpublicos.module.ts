@@ -9,6 +9,9 @@ import {
   NbSelectModule,
   NbListModule,
   NbIconModule,
+  NbAlertModule,
+  NbPopoverModule,
+  NbSearchModule,
 } from '@nebular/theme';
 import { NgxEchartsModule } from 'ngx-echarts';
 
@@ -30,7 +33,9 @@ import { DadosPublicosRoutingModule } from './dpublicos-routing.module';
     NbSelectModule,
     NbListModule,
     NbIconModule,
-    NbButtonModule,
+    NbPopoverModule,
+    NbSearchModule,
+    NbAlertModule,
     NgxEchartsModule,
     DadosPublicosRoutingModule
   ],
