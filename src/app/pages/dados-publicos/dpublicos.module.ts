@@ -19,6 +19,8 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { FormsModule } from '@angular/forms';
 import { DadosPublicosComponent } from './dpublicos.component';
 import { DadosPublicosRoutingModule } from './dpublicos-routing.module';
+import { UploadComponent } from './upload/upload.component';
+import { DadosPublicosService } from './dpublicos.service';
 
 @NgModule({
   imports: [
@@ -41,6 +43,10 @@ import { DadosPublicosRoutingModule } from './dpublicos-routing.module';
   ],
   declarations: [
     DadosPublicosComponent,
+    UploadComponent,
   ],
+  providers: [
+    DadosPublicosService,
+  ]
 })
 export class DadosPublicosModule { }
