@@ -21,6 +21,7 @@ import { DadosPublicosComponent } from './dpublicos.component';
 import { DadosPublicosRoutingModule } from './dpublicos-routing.module';
 import { UploadComponent } from './upload/upload.component';
 import { DadosPublicosService } from './dpublicos.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { DadosPublicosService } from './dpublicos.service';
     NbSearchModule,
     NbAlertModule,
     NgxEchartsModule,
-    DadosPublicosRoutingModule
+    DadosPublicosRoutingModule,
+    NgxSpinnerModule,
   ],
   declarations: [
     DadosPublicosComponent,

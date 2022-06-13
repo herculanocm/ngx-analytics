@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuditUserUpload } from './dpublicos-aux';
 
 @Injectable()
 export class DadosPublicosService {
@@ -16,5 +17,9 @@ export class DadosPublicosService {
         responseType: 'json'
         });
         return this._http.request(req);
+    }
+
+    getAll(): Observable<AuditUserUpload[]> {
+        return this._http.get<AuditUserUpload[]>('http://localhost:3000/api/v1/audit-user-uploads');
     }
 }

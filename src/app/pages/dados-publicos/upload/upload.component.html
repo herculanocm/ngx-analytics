@@ -1,5 +1,11 @@
 <div class="row">
     <div class="col-md-12">
+
+    <ngx-spinner class="spinner-full" name="fullSpinner" [fullScreen]="false" bdColor="rgba(51,51,51,0.8)" size="medium"
+        color="#fff" type="ball-spin-clockwise">
+        <p style="font-size: 20px; color: white">Comunicando com o Servidor, Aguarde...</p>
+    </ngx-spinner>
+
         <nb-card>
             <nb-card-header>
                 Upload de Arquivos
@@ -9,7 +15,7 @@
                 <div class="row">
                     <div class="col-8">
                         <label class="btn btn-default p-0">
-                            <input type="file" (change)="selectFile($event)" />
+                            <input type="file" (change)="selectFile($event)"/>
                         </label>
                     </div>
                     <div class="col-4">
@@ -26,15 +32,36 @@
                     </div>
                 </div>
                 <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
-                <div class="card mt-3">
-                    <div class="card-header">List of Files</div>
-                    <ul class="list-group list-group-flush" *ngFor="let file of fileInfos | async">
-                        <li class="list-group-item">
-                            <a href="{{ file.url }}">{{ file.name }}</a>
-                        </li>
-                    </ul>
-                </div>
+               
+                <br>
+                <hr>
+                <br>
 
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nome Usuário</th>
+                            <th>Email Usuário</th>
+                            <th>Dta Upload</th>
+                            <th>File name</th>
+                            <th>File Size</th>
+                            <th>AWS S3 Key</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let au of auditUserUploads">
+                            <td class="align-left">{{au.aupPkId}}</td>
+                            <td class="align-left">{{au.aupTxNome}}</td>
+                            <td class="align-left">{{au.aupTxEmail}}</td>
+                            <td class="align-left">{{au.aupDtUpload}}</td>
+                            <td class="align-left">{{au.aupTxFileName}}</td>
+                            <td class="align-left">{{au.aupQtFileBytes}}</td>
+                            <td class="align-left">{{au.aupTxS3Key}}</td>
+                        </tr>
+                    </tbody>
+                </table>
 
             </nb-card-body>
         </nb-card>
